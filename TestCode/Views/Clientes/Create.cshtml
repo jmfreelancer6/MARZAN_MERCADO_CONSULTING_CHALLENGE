@@ -1,0 +1,73 @@
+﻿@model Domain.Core.Models.ClientesDTO
+
+@{
+    ViewData["Title"] = "Crear Clientes";
+}
+
+<div class="container-xl px-4 mt-4">
+    <h1>Registrar nuevo cliente</h1>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Datos Cliente</div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="No_Cliente">@Html.DisplayNameFor(model => model.No_Cliente)</label>
+                            <input class="form-control" asp-for="No_Cliente">
+                            <span asp-validation-for="No_Cliente" class="text-danger"></span>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" asp-for="Nombre">@Html.DisplayNameFor(model => model.Nombre)</label>
+                                <input class="form-control" asp-for="Nombre">
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" asp-for="Apellido">@Html.DisplayNameFor(model => model.Apellido)</label>
+                                <input class="form-control" asp-for="Apellido">
+                                <span asp-validation-for="Apellido" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" asp-for="Telefono">@Html.DisplayNameFor(model => model.Telefono)</label>
+                                <input class="form-control" asp-for="Telefono">
+                                <span asp-validation-for="Telefono" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Direccion"> @Html.DisplayNameFor(model => model.Direccion)</label>
+                            <input class="form-control" asp-for="Direccion">
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="submit" value="Crear Nuevo" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <a asp-action="Index" class="btn btn-info float-right">Regresar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

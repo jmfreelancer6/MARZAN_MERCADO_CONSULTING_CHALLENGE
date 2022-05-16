@@ -1,0 +1,67 @@
+﻿@model Domain.Core.Models.OrdenesDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container-xl px-4 mt-4">
+    <h1>Editar Orden</h1>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Orden # @Html.DisplayFor(model => model.No_Orden)</div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="No_Orden"></label>
+                            <input class="form-control" asp-for="No_Orden">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1">Cliente</label>
+                                @Html.DropDownList("ID_Cliente", new SelectList(ViewBag.ID_Cliente, "ID", "Nombre"), "-Seleccione-", new { @class = "form-control" })
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" asp-for="Precio_Total"></label>
+                                <input class="form-control" asp-for="Precio_Total">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" asp-for="Descripcion"></label>
+                                <input class="form-control" asp-for="Descripcion">
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="submit" value="Editar Cliente" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <a asp-action="Index" class="btn btn-info float-right">Regresar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

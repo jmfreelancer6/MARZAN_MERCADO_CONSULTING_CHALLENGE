@@ -1,0 +1,86 @@
+﻿@model Domain.Core.Models.UsersDTO
+@{
+    ViewData["Title"] = "Iniciar Sesion";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<style>
+    body {
+        background: #eee
+    }
+
+    .card {
+        border: none;
+        height: 320px
+    }
+
+    .forms-inputs {
+        position: relative
+    }
+
+        .forms-inputs span {
+            position: absolute;
+            top: -18px;
+            left: 10px;
+            background-color: #fefefe;
+            padding: 5px 10px;
+            font-size: 15px
+        }
+
+        .forms-inputs input {
+            width: 100%;
+            height: 50px;
+            border: 2px solid #eee
+        }
+
+            .forms-inputs input:focus {
+                box-shadow: none;
+                outline: none;
+                border: 2px solid #000
+            }
+
+    .btn {
+        height: 50px
+    }
+
+    .success-data {
+        display: flex;
+        flex-direction: column
+    }
+
+    .bxs-badge-check {
+        font-size: 90px
+    }
+</style>
+<form asp-action="Index">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card px-5 py-5" id="form1">
+                    <div class="form-data" v-if="!submitted">
+                        <div class="forms-inputs mb-4">
+                            <label class="small mb-1" asp-for="usuario"></label>
+                            <input autocomplete="off" type="text" asp-for="usuario">
+                            <span asp-validation-for="usuario" class="text-danger"></span>
+                        </div>
+                        <div class="forms-inputs mb-4">
+                            <label class="small mb-1" asp-for="Contrasena"></label>
+                            <input autocomplete="off" type="password" asp-for="Contrasena">
+                            <span asp-validation-for="Contrasena" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-dark w-100">Iniciar Sesion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

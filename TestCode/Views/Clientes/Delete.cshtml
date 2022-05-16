@@ -1,0 +1,67 @@
+﻿@model Domain.Core.Models.ClientesDTO
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+    <div class="container-xl px-4 mt-4">
+        <h1>Eliminar Cliente</h1>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-12">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header">Cliente # @Html.DisplayFor(model => model.No_Cliente)</div>
+                    <div class="card-body">
+                        <form asp-action="Delete">
+                            <!-- Form Group (username)-->
+                            <div class="mb-3">
+                                <label class="small mb-1">@Html.DisplayNameFor(model => model.No_Cliente)</label>
+                                <input class="form-control" value="@Html.DisplayFor(model => model.No_Cliente)" readonly>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">@Html.DisplayNameFor(model => model.Nombre)</label>
+                                    <input class="form-control" value="@Html.DisplayFor(model => model.Nombre)" readonly>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">@Html.DisplayNameFor(model => model.Apellido)</label>
+                                    <input class="form-control" value="@Html.DisplayFor(model => model.Apellido)" readonly>
+                                </div>
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">@Html.DisplayNameFor(model => model.Telefono)</label>
+                                    <input class="form-control" value="@Html.DisplayFor(model => model.Telefono)" readonly>
+                                </div>
+                            </div>
+                            <!-- Form Group (email address)-->
+                            <div class="mb-3">
+                                <label class="small mb-1"> @Html.DisplayNameFor(model => model.Direccion)</label>
+                                <input class="form-control" value="@Html.DisplayFor(model => model.Direccion)" readonly>
+                            </div>
+                            <div class="row">
+                                <input type="hidden" asp-for="ID" />
+                                <div class="col-sm-10">
+                                    <div class="form-group">
+                                        <input type="submit" value="Eliminar Cliente" class="btn btn-danger" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <a asp-action="Index" class="btn btn-info float-right">Regresar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

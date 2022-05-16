@@ -1,0 +1,9 @@
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\bin\Debug\netcoreapp3.1\Infraestructure.Help.deps.json
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\bin\Debug\netcoreapp3.1\Infraestructure.Help.dll
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\bin\Debug\netcoreapp3.1\Infraestructure.Help.pdb
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.AssemblyInfoInputs.cache
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.AssemblyInfo.cs
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.csproj.CoreCompileInputs.cache
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.dll
+C:\Users\Joskin Villaman\Desktop\TestCode\Infraestructure.Help\obj\Debug\netcoreapp3.1\Infraestructure.Help.pdb

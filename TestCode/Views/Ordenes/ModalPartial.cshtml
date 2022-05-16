@@ -1,0 +1,169 @@
+﻿@model Domain.Core.Models.OrdenesDTO
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label asp-for="No_Orden" class="control-label"></label>
+                        <input asp-for="No_Orden" class="form-control" />
+                        <span asp-validation-for="No_Orden" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label asp-for="ID_Cliente" class="control-label"></label>
+                        @Html.DropDownList("ID_Cliente", new SelectList(ViewBag.ID_Cliente, "ID", "Nombre"), "-Seleccione-", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <h3>Detalle de la orden</h3>
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label">Producto</label>
+                        @Html.DropDownList("Producto", new SelectList(ViewBag.Productos, "ID", "Nombre"), "-Seleccione-", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label">Precio</label>
+                        <input class="form-control" type="number" id="precio"/>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label">Cantidad</label>
+                        <input class="form-control" type="number" id="cantidad"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" id="agregar"/>
+            </div>
+            <table class="table table-hover" id="tbl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Producto
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Precio
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <hr />
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label asp-for="Precio_Total" class="control-label"></label>
+                        <input asp-for="Precio_Total" class="form-control"  readonly/>
+                        <span asp-validation-for="Precio_Total" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Crear Nuevo" class="btn btn-primary" id="saveOrder"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $('#tbl').on('change', 'tbody', function () {
+        var row = $(this).closest('tr');
+        var total = 0;
+        $('td:eq(3) input', row).each(function () {
+            total += Number($(this).val());
+        });
+        console.log(total);
+        $("#Precio_Total").val(total);
+    });
+
+    $("#agregar").click(function (e) {
+        e.preventDefault();
+        var productID = document.getElementById("Producto");
+        var productName = productID.options[productID.selectedIndex].text;
+        var detailsTableBody = $("#tbl tbody");
+        //callback function
+        var productItem = '<tr>' +
+            '<td>' + $("#Producto").val() + '</td>' +
+            '<td>' + productName + '</td>' +
+            '<td>' + $("#precio").val() + '</td>' +
+            '<td>' + $("#cantidad").val() + '</td>' +
+            '<td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td>' +
+            '</tr>';
+        detailsTableBody.append(productItem);
+        var row = $("#tbl tbody tr");
+        var total = 0;
+        $('td:eq(3)', row).each(function () {
+            console.log($(this).text());
+            total += Number($(this).text());
+        });
+        $("#Precio_Total").val(total);
+    });
+    $(document).on('click', 'a.deleteItem', function (e) {
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+            });
+        }
+    });
+
+    function saveOrder() {
+        var orderArr = [];
+        orderArr.length = 0;
+
+        $.each($("#tbl tbody tr"), function () {
+            orderArr.push({
+                ID_Productos: $(this).find('td:eq(0)').html(),
+            });
+        });
+        $.post("/Ordenes/SaveOrder",
+            {
+                No_Orden: $("#No_Orden").val(),
+                ID_Cliente: $("#ID_Cliente").val(),
+                Descripcion: $("#Descripcion").val(),
+                Precio_Total: $("#Precio_Total").val(),
+                Tbl_OrdenesDetail: orderArr
+            });
+    }
+
+    $("#saveOrder").click(function (e) {
+        $.when(saveOrder()).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
